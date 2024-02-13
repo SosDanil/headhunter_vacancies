@@ -1,8 +1,8 @@
 class Vacancy:
     vacancies_list = []
 
-    def __init__(self, name: str, city: str, url: str, salary_from: int = 0,
-                 salary_to: int = 0):
+    def __init__(self, name: str, city: str, url: str, salary_from: int,
+                 salary_to: int):
         self.name = name
         self.salary_from = salary_from
         self.salary_to = salary_to
@@ -14,19 +14,36 @@ class Vacancy:
                 f"{self.url})")
 
     def __str__(self):
-        return (f"Профессия: {self.name} с зарплатой от {self.salary_from} до {self.salary_to} "
-                f"в городе {self.city}, ссылка на сайт hh.ru: {self.url}")
+        if self.salary_from is None:
+            return (f"Профессия: {self.name} с зарплатой до {self.salary_to} "
+                    f"в городе {self.city}, ссылка на сайт hh.ru: {self.url}")
+        elif self.salary_to is None:
+            return (f"Профессия: {self.name} с зарплатой от {self.salary_from} "
+                    f"в городе {self.city}, ссылка на сайт hh.ru: {self.url}")
+        elif self.salary_from == 0 and self.salary_to == 0:
+            return (f"Профессия: {self.name}, зарплата не указана, "
+                    f"в городе {self.city}, ссылка на сайт hh.ru: {self.url}")
+        else:
+            return (f"Профессия: {self.name} с зарплатой от {self.salary_from} до {self.salary_to} "
+                    f"в городе {self.city}, ссылка на сайт hh.ru: {self.url}")
 
     @classmethod
     def cast_to_object_list(cls, hh_vacancies):
         for vacancy in hh_vacancies:
-            name = vacancy["name"]
+            name = vacancy.get("name")
             city = vacancy["area"]["name"]
-            url = vacancy["alternate_url"]
-            salary_from = vacancy["salary"]["from"]
-            salary_to = vacancy["salary"]["to"]
+            url = vacancy.get("alternate_url")
+            try:
+                salary_from = vacancy["salary"]["from"]
+            except TypeError:
+                salary_from = 0
+            try:
+                salary_to = vacancy["salary"]["to"]
+            except TypeError:
+                salary_to = 0
             vacancy_to_list = cls(name, city, url, salary_from, salary_to)
             cls.vacancies_list.append(vacancy_to_list)
+
 
 
 
