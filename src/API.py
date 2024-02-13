@@ -1,3 +1,4 @@
+import json
 from abc import ABC, abstractmethod
 
 import requests
@@ -18,16 +19,15 @@ class HeadHunterAPI(BaseAPI):
             "per_page": 100
         }
         response = requests.get(f"https://api.hh.ru/vacancies/", params=params)
-        return response
+        hh_vacancies = json.loads(response.text)
+        return hh_vacancies
 
 
 # if __name__ == '__main__':
 #     hh_api = HeadHunterAPI()
 #     hh_response = hh_api.get_response("парикмахер")
 #     print(hh_response)
-#     print(hh_response.status_code)
-#     print(hh_response.ok)
-#     print(hh_response.json())
+
 
 
 
