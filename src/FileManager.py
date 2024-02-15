@@ -28,10 +28,12 @@ class JSONManager(FileManager):
                             "Требования": vacancy.requirement, "Обязанности": vacancy.responsibility}
             vacancies_list.append(json_vacancy)
         with open(path, 'w', encoding="UTF-8") as f:
-            json.dump(vacancies_list, f, indent=4)
+            json.dump(vacancies_list, f, indent=4, ensure_ascii=False)
 
     def read_file(self, path):
-        pass
+        with open(path, "r", encoding="UTF-8") as f:
+            data = json.load(f)
+        print(json.dumps(data, indent=4,  ensure_ascii=False))
 
     def delete_from_file(self, path):
         pass
