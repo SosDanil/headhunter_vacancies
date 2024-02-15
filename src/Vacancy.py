@@ -69,10 +69,10 @@ class Vacancy:
         return filtered_vacancies
 
     @staticmethod
-    def get_vacancies_by_salary(vacancies, salary_from, salary_to):
+    def get_vacancies_by_salary(vacancies_list, salary_from, salary_to):
         """Сортирует список вакансий с учетом диапазона указанных зарплат"""
         vacancies_by_salary = []
-        for vacancy in vacancies:
+        for vacancy in vacancies_list:
             if vacancy.salary_from == 0 and vacancy.salary_to == 0:
                 continue
             elif salary_from <= vacancy.salary_from <= salary_to and salary_from <= vacancy.salary_to <= salary_to:
@@ -89,6 +89,11 @@ class Vacancy:
         """Сортирует список, в нашем случае, объектов-вакансий по зарплате от большей к меньшей"""
         sorted_vacancies = sorted(unsorted_vacancies, reverse=True)
         return sorted_vacancies
+
+    @staticmethod
+    def get_top_vacancies(vacancies_list, top_number):
+        """Формирует список из N позиций, в нашем случае, топ по зарплате"""
+        return vacancies_list[0:top_number]
 
     @classmethod
     def cast_to_object_list(cls, hh_vacancies: dict) -> list:
