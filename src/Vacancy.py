@@ -58,18 +58,28 @@ class Vacancy:
                     return True
 
     @staticmethod
-    def get_sorted_vacancies(unsorted_list: list) -> list:
+    def get_filtered_vacancies(vacancies_list: list, filter_word: list) -> list:
+        filtered_vacancies = []
+        for vacancy in vacancies_list:
+            for word in filter_word:
+                if word in vacancy.name or word in vacancy.requirement or word in vacancy.responsibility:
+                    filtered_vacancies.append(vacancy)
+        return filtered_vacancies
+
+    @staticmethod
+    def get_sorted_vacancies(unsorted_vacancies: list) -> list:
         """Сортирует список, в нашем случае, объектов-вакансий по зарплате от большей к меньшей"""
-        sorted_vacancies = sorted(unsorted_list, reverse=True)
+        sorted_vacancies = sorted(unsorted_vacancies, reverse=True)
         return sorted_vacancies
 
     @classmethod
-    def cast_to_object_list(cls, hh_vacancies):
+    def cast_to_object_list(cls, hh_vacancies: dict) -> list:
         vacancies_list = []
         for vacancy in hh_vacancies:
             name = vacancy["name"]
             city = vacancy["area"]["name"]
             url = vacancy["alternate_url"]
+
             try:
                 salary_from = int(vacancy["salary"]["from"])
             except TypeError:
@@ -78,6 +88,7 @@ class Vacancy:
                 salary_to = int(vacancy["salary"]["to"])
             except TypeError:
                 salary_to = 0
+
             requirement = vacancy["snippet"]["requirement"]
             if requirement is None:
                 requirement = "не указано"
@@ -87,7 +98,6 @@ class Vacancy:
 
             vacancy_to_list = cls(name, city, url, salary_from, salary_to, requirement, responsibility)
             vacancies_list.append(vacancy_to_list)
-
         return vacancies_list
 
 
