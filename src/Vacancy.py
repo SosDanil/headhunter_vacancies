@@ -79,13 +79,11 @@ class Vacancy:
                 salary_to = int(vacancy["salary"]["to"])
             except TypeError:
                 salary_to = 0
-            try:
-                requirement = vacancy["snippet"]["requirement"]
-            except TypeError:
+            requirement = vacancy["snippet"]["requirement"]
+            if requirement is None:
                 requirement = "не указано"
-            try:
-                responsibility = vacancy["snippet"]["responsibility"]
-            except TypeError:
+            responsibility = vacancy["snippet"]["responsibility"]
+            if responsibility is None:
                 responsibility = "не указано"
 
             vacancy_to_list = cls(name, city, url, salary_from, salary_to, requirement, responsibility)
