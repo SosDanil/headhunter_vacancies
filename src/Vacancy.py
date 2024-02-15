@@ -76,9 +76,10 @@ class Vacancy:
                 vacancies_by_salary.append(vacancy)
             elif vacancy.salary_from == 0 and salary_from <= vacancy.salary_to <= salary_to:
                 vacancies_by_salary.append(vacancy)
+            elif vacancy.salary_to == 0 and salary_from <= vacancy.salary_from  <= salary_to:
+                vacancies_by_salary.append(vacancy)
 
         return vacancies_by_salary
-
 
     @staticmethod
     def get_sorted_vacancies(unsorted_vacancies: list) -> list:
