@@ -62,7 +62,8 @@ class Vacancy:
         filtered_vacancies = []
         for vacancy in vacancies_list:
             for word in filter_word:
-                if word in vacancy.name or word in vacancy.requirement or word in vacancy.responsibility:
+                if (word in vacancy.name or word in vacancy.city or word in vacancy.requirement or
+                        word in vacancy.responsibility):
                     filtered_vacancies.append(vacancy)
         return filtered_vacancies
 
