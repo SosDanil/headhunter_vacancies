@@ -59,6 +59,7 @@ class Vacancy:
 
     @staticmethod
     def get_filtered_vacancies(vacancies_list: list, filter_word: list) -> list:
+        """Фильтрует список вакансий через заданные ключевые слова"""
         filtered_vacancies = []
         for vacancy in vacancies_list:
             for word in filter_word:
@@ -69,6 +70,7 @@ class Vacancy:
 
     @staticmethod
     def get_vacancies_by_salary(vacancies, salary_from, salary_to):
+        """Сортирует список вакансий с учетом диапазона указанных зарплат"""
         vacancies_by_salary = []
         for vacancy in vacancies:
             if vacancy.salary_from == 0 and vacancy.salary_to == 0:
@@ -90,6 +92,7 @@ class Vacancy:
 
     @classmethod
     def cast_to_object_list(cls, hh_vacancies: dict) -> list:
+        """Создает список объектов-вакансий по словарю данных, полученных через api.hh.ru"""
         vacancies_list = []
         for vacancy in hh_vacancies:
             name = vacancy["name"]
