@@ -1,6 +1,4 @@
 class Vacancy:
-    vacancies_list = []
-
     def __init__(self, name: str, city: str, url: str, salary_from: int,
                  salary_to: int, requirement: str, responsibility: str):
         self.name = name
@@ -59,14 +57,15 @@ class Vacancy:
                 if self.salary_to < other.salary_to:
                     return True
 
-    @classmethod
-    def get_sorted_vacancies(cls) -> list:
-        """Сортирует список объектов-вакансий по зарплате от большей к меньшей"""
-        sorted_vacancies = sorted(cls.vacancies_list, reverse=True)
+    @staticmethod
+    def get_sorted_vacancies(unsorted_list: list) -> list:
+        """Сортирует список, в нашем случае, объектов-вакансий по зарплате от большей к меньшей"""
+        sorted_vacancies = sorted(unsorted_list, reverse=True)
         return sorted_vacancies
 
     @classmethod
     def cast_to_object_list(cls, hh_vacancies):
+        vacancies_list = []
         for vacancy in hh_vacancies:
             name = vacancy["name"]
             city = vacancy["area"]["name"]
@@ -87,8 +86,9 @@ class Vacancy:
                 responsibility = "не указано"
 
             vacancy_to_list = cls(name, city, url, salary_from, salary_to, requirement, responsibility)
-            cls.vacancies_list.append(vacancy_to_list)
+            vacancies_list.append(vacancy_to_list)
 
+        return vacancies_list
 
 
 
