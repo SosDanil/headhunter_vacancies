@@ -36,4 +36,6 @@ class JSONManager(FileManager):
         print(json.dumps(data, indent=4,  ensure_ascii=False))
 
     def delete_from_file(self, path):
-        pass
+        empty_list = []
+        with open(path, "w", encoding="UTF-8") as f:
+            json.dump(empty_list, f)
