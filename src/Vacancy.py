@@ -2,10 +2,10 @@ class Vacancy:
     def __init__(self, name: str, city: str, url: str, salary_from: int,
                  salary_to: int, requirement: str, responsibility: str):
         self.name = name
-        self.salary_from = salary_from
-        self.salary_to = salary_to
         self.city = city
         self.url = url
+        self.salary_from = salary_from
+        self.salary_to = salary_to
         self.requirement = requirement
         self.responsibility = responsibility
 
