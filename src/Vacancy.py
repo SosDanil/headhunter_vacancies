@@ -13,7 +13,7 @@ class Vacancy:
 
     def __repr__(self):
         return (f"{self.__class__.__name__}({self.name}, {self.salary_from}, {self.salary_to}, {self.city}, "
-                f"{self.url})")
+                f"{self.url}, {self.requirement}, {self.responsibility})")
 
     def __str__(self):
         if self.salary_from == 0 and self.salary_to == 0:
