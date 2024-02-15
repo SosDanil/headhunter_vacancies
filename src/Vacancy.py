@@ -60,6 +60,12 @@ class Vacancy:
                     return True
 
     @classmethod
+    def get_sorted_vacancies(cls) -> list:
+        """Сортирует список объектов-вакансий по зарплате от большей к меньшей"""
+        sorted_vacancies = sorted(cls.vacancies_list, reverse=True)
+        return sorted_vacancies
+
+    @classmethod
     def cast_to_object_list(cls, hh_vacancies):
         for vacancy in hh_vacancies:
             name = vacancy["name"]
