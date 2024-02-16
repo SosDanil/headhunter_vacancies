@@ -74,3 +74,8 @@ def test_get_vacancies_by_salary(vacancies_list):
                                                                               test_vacancy4, test_vacancy6]
     assert Vacancy.get_vacancies_by_salary(vacancies_list, 0, 50000) == [test_vacancy4,
                                                                          test_vacancy6]
+
+
+def test_get_sorted_vacancies(vacancies_list):
+    assert Vacancy.get_sorted_vacancies(vacancies_list) == [test_vacancy3, test_vacancy1, test_vacancy6,
+                                                            test_vacancy4, test_vacancy2, test_vacancy5]
