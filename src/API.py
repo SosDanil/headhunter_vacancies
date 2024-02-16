@@ -30,7 +30,3 @@ class HeadHunterAPI(BaseAPI):
 #     print(hh_response)
 #     # for vacancy in hh_response:
 #     #     print(vacancy)
-
-
-
-

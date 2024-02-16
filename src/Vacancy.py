@@ -129,10 +129,3 @@ class Vacancy:
             vacancy_to_list = cls(name, city, url,  requirement, responsibility, salary_from, salary_to)
             vacancies_list.append(vacancy_to_list)
         return vacancies_list
-
-
-
-# if __name__ == '__main__':
-#     test_vacancy = Vacancy("farmer", "Perm", "www.ru")
-#     print(repr(test_vacancy))
-#     print(test_vacancy)

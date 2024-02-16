@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class FileManager(ABC):
     @abstractmethod
-    def write_to_file(self, path, vacancies):
+    def add_to_file(self, path, vacancies):
         pass
 
     @abstractmethod
@@ -20,7 +20,7 @@ class JSONManager(FileManager):
     def __init__(self):
         pass
 
-    def write_to_file(self, path, vacancies):
+    def add_to_file(self, path, vacancies):
         vacancies_list = []
         for vacancy in vacancies:
             json_vacancy = {"Название вакансии": vacancy.name, "Город": vacancy.city, "Ссылка": vacancy.url,
