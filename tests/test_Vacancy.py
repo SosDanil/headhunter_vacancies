@@ -43,6 +43,24 @@ test_vacancy6 = Vacancy("Лаборант",
                         "помогать в выполнении научных задач основному персоналу",
                         20000, 30000)
 
+# тестовый список вакансий, полученый через hh.api
+test_hh_vacancies = [
+    {
+        "name": "Охранник",
+        "area": {"name": "Самара"},
+        "alternate_url": "www.hh.api.cat",
+        "salary": {"from": "30000", "to": "50000"},
+        "snippet": {"requirement": "Умение стрелять", "responsibility": None}
+    },
+    {
+        "name": "Уборщица",
+        "area": {"name": "Иркутск"},
+        "alternate_url": "www.hh.api.dog",
+        "salary": {"from": None, "to": None},
+        "snippet": {"requirement": None, "responsibility": "Мыть полы"}
+    }
+]
+
 
 @pytest.fixture
 def vacancies_list():
@@ -87,3 +105,9 @@ def test_get_top_vacancies(vacancies_list):
     assert Vacancy.get_top_vacancies(vacancies_list, 0) == []
     assert Vacancy.get_top_vacancies(vacancies_list, 10) == [test_vacancy1, test_vacancy2, test_vacancy3,
                                                              test_vacancy4, test_vacancy5, test_vacancy6]
+
+
+# def test_cast_to_object_list():
+#     assert Vacancy.cast_to_object_list(test_hh_vacancies) == [
+#         Vacancy("охранник", "самара", "www.hh.api.cat", "умение стрелять", "не указано", 30000, 50000),
+#         Vacancy("уборщица", "иркутск", "www.hh.api.dog", "не указано", "мыть полы", 0, 0)]
