@@ -10,8 +10,8 @@ class Vacancy:
         self.salary_to = salary_to
 
     def __repr__(self):
-        return (f"{self.__class__.__name__}({self.name}, {self.salary_from}, {self.salary_to}, {self.city}, "
-                f"{self.url}, {self.requirement}, {self.responsibility})")
+        return (f"{self.__class__.__name__}({self.name},  {self.city}, {self.url}, {self.requirement},"
+                f" {self.responsibility}, {self.salary_from}, {self.salary_to},")
 
     def __str__(self):
         if self.salary_from == 0 and self.salary_to == 0:
@@ -36,6 +36,7 @@ class Vacancy:
                     f"Обязанности: {self.responsibility}\n")
 
     def __lt__(self, other):
+        # salary_from более важный показатель, чем salary_to (потому что может означать и от нуля)
         if self.salary_from == 0 and other.salary_from == 0:
             if self.salary_to < other.salary_to:
                 return True
