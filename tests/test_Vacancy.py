@@ -79,3 +79,11 @@ def test_get_vacancies_by_salary(vacancies_list):
 def test_get_sorted_vacancies(vacancies_list):
     assert Vacancy.get_sorted_vacancies(vacancies_list) == [test_vacancy3, test_vacancy1, test_vacancy6,
                                                             test_vacancy4, test_vacancy2, test_vacancy5]
+
+
+def test_get_top_vacancies(vacancies_list):
+    # в данном тесте получает не отсортированный список, но не суть, главное функционал
+    assert Vacancy.get_top_vacancies(vacancies_list, 3) == [test_vacancy1, test_vacancy2, test_vacancy3]
+    assert Vacancy.get_top_vacancies(vacancies_list, 0) == []
+    assert Vacancy.get_top_vacancies(vacancies_list, 10) == [test_vacancy1, test_vacancy2, test_vacancy3,
+                                                             test_vacancy4, test_vacancy5, test_vacancy6]
