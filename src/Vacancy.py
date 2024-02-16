@@ -1,11 +1,11 @@
 class Vacancy:
     def __init__(self, name: str, city: str, url: str, requirement: str, responsibility: str, salary_from: int = 0,
                  salary_to: int = 0):
-        self.name = name
-        self.city = city
-        self.url = url
-        self.requirement = requirement
-        self.responsibility = responsibility
+        self.name = name.lower()
+        self.city = city.lower()
+        self.url = url.lower()
+        self.requirement = requirement.lower()
+        self.responsibility = responsibility.lower()
         self.salary_from = salary_from
         self.salary_to = salary_to
 
@@ -100,9 +100,9 @@ class Vacancy:
         """Создает список объектов-вакансий по словарю данных, полученных через api.hh.ru"""
         vacancies_list = []
         for vacancy in hh_vacancies:
-            name = vacancy["name"]
-            city = vacancy["area"]["name"]
-            url = vacancy["alternate_url"]
+            name = vacancy["name"].lower()
+            city = vacancy["area"]["name"].lower()
+            url = vacancy["alternate_url"].lower()
 
             try:
                 salary_from = int(vacancy["salary"]["from"])
@@ -113,10 +113,10 @@ class Vacancy:
             except TypeError:
                 salary_to = 0
 
-            requirement = vacancy["snippet"]["requirement"]
+            requirement = vacancy["snippet"]["requirement"].lower()
             if requirement is None:
                 requirement = "не указано"
-            responsibility = vacancy["snippet"]["responsibility"]
+            responsibility = vacancy["snippet"]["responsibility"].lower()
             if responsibility is None:
                 responsibility = "не указано"
 
