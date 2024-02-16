@@ -1,13 +1,13 @@
 class Vacancy:
-    def __init__(self, name: str, city: str, url: str, salary_from: int,
-                 salary_to: int, requirement: str, responsibility: str):
+    def __init__(self, name: str, city: str, url: str, requirement: str, responsibility: str, salary_from: int = 0,
+                 salary_to: int = 0):
         self.name = name
         self.city = city
         self.url = url
-        self.salary_from = salary_from
-        self.salary_to = salary_to
         self.requirement = requirement
         self.responsibility = responsibility
+        self.salary_from = salary_from
+        self.salary_to = salary_to
 
     def __repr__(self):
         return (f"{self.__class__.__name__}({self.name}, {self.salary_from}, {self.salary_to}, {self.city}, "
@@ -59,7 +59,7 @@ class Vacancy:
 
     @staticmethod
     def get_filtered_vacancies(vacancies_list: list, filter_word: list) -> list:
-        """Фильтрует список вакансий через заданные ключевые слова"""
+        """Фильтрует список вакансий через заданные ключевые слова (если хотя бы одно совпадает)"""
         filtered_vacancies = []
         for vacancy in vacancies_list:
             for word in filter_word:
@@ -79,7 +79,7 @@ class Vacancy:
                 vacancies_by_salary.append(vacancy)
             elif vacancy.salary_from == 0 and salary_from <= vacancy.salary_to <= salary_to:
                 vacancies_by_salary.append(vacancy)
-            elif vacancy.salary_to == 0 and salary_from <= vacancy.salary_from  <= salary_to:
+            elif vacancy.salary_to == 0 and salary_from <= vacancy.salary_from <= salary_to:
                 vacancies_by_salary.append(vacancy)
 
         return vacancies_by_salary
@@ -120,7 +120,7 @@ class Vacancy:
             if responsibility is None:
                 responsibility = "не указано"
 
-            vacancy_to_list = cls(name, city, url, salary_from, salary_to, requirement, responsibility)
+            vacancy_to_list = cls(name, city, url,  requirement, responsibility, salary_from, salary_to)
             vacancies_list.append(vacancy_to_list)
         return vacancies_list
 
