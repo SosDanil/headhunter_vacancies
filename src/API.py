@@ -6,13 +6,13 @@ import requests
 
 class BaseAPI(ABC):
     @abstractmethod
-    def get_response(self, vacancy_name):
+    def get_vacancies(self, vacancy_name):
         pass
 
 
 class HeadHunterAPI(BaseAPI):
 
-    def get_response(self, vacancy_name):
+    def get_vacancies(self, vacancy_name):
         params = {
             "text": f"NAME:{vacancy_name}",
             "page": 0,
