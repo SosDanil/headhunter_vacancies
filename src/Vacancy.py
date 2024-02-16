@@ -10,8 +10,8 @@ class Vacancy:
         self.salary_to = salary_to
 
     def __repr__(self):
-        return (f"{self.__class__.__name__}({self.name},  {self.city}, {self.url}, {self.requirement},"
-                f" {self.responsibility}, {self.salary_from}, {self.salary_to},")
+        return (f"{self.__class__.__name__}({self.name}, {self.city}, {self.url}, {self.requirement}, "
+                f"{self.responsibility}, {self.salary_from}, {self.salary_to})")
 
     def __str__(self):
         if self.salary_from == 0 and self.salary_to == 0:
@@ -37,6 +37,7 @@ class Vacancy:
 
     def __lt__(self, other):
         # salary_from более важный показатель, чем salary_to (потому что может означать и от нуля)
+        # итоговый результат сравнения объектов такой, какого я добивался
         if self.salary_from == 0 and other.salary_from == 0:
             if self.salary_to < other.salary_to:
                 return True
@@ -97,7 +98,7 @@ class Vacancy:
         return vacancies_list[0:top_number]
 
     @classmethod
-    def cast_to_object_list(cls, hh_vacancies: dict) -> list:
+    def cast_to_object_list(cls, hh_vacancies: list) -> list:
         """Создает список объектов-вакансий по словарю данных, полученных через api.hh.ru"""
         vacancies_list = []
         for vacancy in hh_vacancies:
@@ -114,12 +115,16 @@ class Vacancy:
             except TypeError:
                 salary_to = 0
 
-            requirement = vacancy["snippet"]["requirement"].lower()
+            requirement = vacancy["snippet"]["requirement"]
             if requirement is None:
                 requirement = "не указано"
-            responsibility = vacancy["snippet"]["responsibility"].lower()
+            else:
+                requirement = requirement.lower()
+            responsibility = vacancy["snippet"]["responsibility"]
             if responsibility is None:
                 responsibility = "не указано"
+            else:
+                responsibility = responsibility.lower()
 
             vacancy_to_list = cls(name, city, url,  requirement, responsibility, salary_from, salary_to)
             vacancies_list.append(vacancy_to_list)

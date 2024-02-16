@@ -26,10 +26,10 @@ class HeadHunterAPI(BaseAPI):
 
 # if __name__ == '__main__':
 #     hh_api = HeadHunterAPI()
-#     hh_response = hh_api.get_response("парикмахер")
-#     # print(hh_response)
-#     for vacancy in hh_response:
-#         print(vacancy)
+#     hh_response = hh_api.get_vacancies("парикмахер")
+#     print(hh_response)
+#     # for vacancy in hh_response:
+#     #     print(vacancy)
 
 
 
