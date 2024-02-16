@@ -65,3 +65,12 @@ def test_get_filtered_vacancies(vacancies_list):
                                                                                          test_vacancy5, test_vacancy6]
     assert Vacancy.get_filtered_vacancies(vacancies_list, ["котик"]) == []
 
+
+def test_get_vacancies_by_salary(vacancies_list):
+    assert Vacancy.get_vacancies_by_salary(vacancies_list, 50000, 80000) == []
+    assert Vacancy.get_vacancies_by_salary(vacancies_list, 0, 0) == []
+    assert Vacancy.get_vacancies_by_salary(vacancies_list, 10000, 200000) == [test_vacancy1,
+                                                                              test_vacancy2, test_vacancy3,
+                                                                              test_vacancy4, test_vacancy6]
+    assert Vacancy.get_vacancies_by_salary(vacancies_list, 0, 50000) == [test_vacancy4,
+                                                                         test_vacancy6]
